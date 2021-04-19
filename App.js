@@ -2,6 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import SmsHandler from 'react-native-sms-handler';
+import { PermissionsAndroid } from 'react-native';
+
+PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_SMS).then(result=>{
+  if(PermissionsAndroid.RESULTS.GRANTED == result) {
+    SmsHandler.getSmsInPhone(results => {
+      console.log(results);
+    });
+  }
+})
+
 export default function App() {
   return (
     <View style={styles.container}>
